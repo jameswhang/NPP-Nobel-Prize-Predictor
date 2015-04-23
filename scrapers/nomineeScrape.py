@@ -19,9 +19,12 @@ for i in range(10000):
     soup = BeautifulSoup(html)
 
     entries = soup.find_all('td')
+    category = str(soup.find('b'))
+    if category == 'None':
+        continue
 
     # filled entries have 6 rows in the table
-    if len(entries) == 6:
+    if len(entries) == 6 and "Nominee" in category:
         # strip html tags
         firstName = str(entries[1]).replace('<td>', '').replace('</td>', '')
         lastName = str(entries[3]).replace('<td>', '').replace('</td>', '')
