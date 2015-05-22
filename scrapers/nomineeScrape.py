@@ -20,8 +20,14 @@ for i in range(10000):
 
     entries = soup.find_all('td')
     category = str(soup.find('b'))
+    prize_type = soup.find_all('li', class_='inside')
+    for ptype in prize_type:
+        print ptype
+
     if category == 'None':
         continue
+
+    print prize_type
 
     # filled entries have 6 rows in the table
     if len(entries) == 6 and "Nominee" in category:
