@@ -19,7 +19,7 @@ for line in nobelFile:
     data = line.split(',')
     winnerNames.append(data[2])
 
-winnerNames = ['Marie Curie']
+#winnerNames = ['Marie Curie']
 for winner in winnerNames:
     print winner
     newDict = {}
@@ -38,13 +38,11 @@ for winner in winnerNames:
     soup = BeautifulSoup(wikipage)
     infoBox = soup.find('table', class_='infobox')
 
-    print infoBox
-    if type(infoBox) == 'NoneType':
+    #print infoBox
+    if infoBox is None:
         continue
     attr_list = infoBox.find_all('th')
     attr_val_list = infoBox.find_all('td')
-    print attr_list
-    print attr_val_list
 
     index = 0
 
@@ -55,17 +53,17 @@ for winner in winnerNames:
 
         if attr in categories:
             attr_val = attr_val_list[index].get_text()
-            newDict[attr] = attr_val
             print attr
             print attr_val
-    newDict['Name'] = winner
+            newDict[attr] = attr_val
+
+        index += 1
         
     time.sleep(random.random() * 5)
+    scrapedInfo.append(newDict)
 
-for attr in newDict:
-    writeFile.write(attr)
-    writeFile.write(' ')
-
-for attr, val in newDict.iteritems():
-    writeFile.write(val.encode('utf8'))
+for item in scrapedInfo:
+    for attr in item:
+        writeFile.write(val.replace('\n', '').encode('utf8'))
+        writeFile.write(' ') 
 
