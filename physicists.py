@@ -7,6 +7,7 @@ import urllib2
 from bs4 import BeautifulSoup
 import random
 import time
+import scrapeLib
 
 def get_year(people_str):
     people = people_str.split('(')[1]
@@ -23,7 +24,7 @@ soup = BeautifulSoup(wikipage)
 
 uls = soup.find_all('ul')
 
-writeFile.write('Name WikiLink')
+writeFile.write('Name, Year, WikiLink\n')
 
 for i in range(1, 25):
     people = uls[i].find_all('li')
@@ -32,24 +33,31 @@ for i in range(1, 25):
             if 'born' in str(person):
                 year = str(person).split('>')[3].split('(')[1].split(')')[0].split('born')
                 if len(year) is 2:
-                    print person.get_text()
                     year = year[1].replace(' ', '')
-                    link = str(person).split('"')[1]
+                    splitonquote = str(person).split('"')
+                    for split in splitonquote:
+                        if '/wiki/' in split:
+                            link = split
+                            break
+                    name = scrapeLib.convertLinkToName(link.split('/')[2])
                     if int(year) > 1850:
-                        print person.get_text()
-                        print link
-                        print year
+                        writeFile.write(name + ', ' + year + ', ' + link + '\n')
             elif '-' in str(person):
-                print person.get_text()
+                if 'Snellius' in str(person): # this guy has a weird issue
+                    continue
                 splittags = str(person).split('>')
                 year = splittags[len(splittags)-2].split('(')[1]
-                print year
+                links = str(person).split('"')
+                for elem in links:
+                    if '/wiki/' in elem:
+                        link = elem
+                        break
+                name = scrapeLib.convertLinkToName(link.split('/')[2])
+                
                 if '-' in year:
                     year = year.split('-')[0]
                 else:
                     year = year.split('\xe2')[0]
-                print year
+                
                 if int(year) > 1850:
-                    print person.get_text()
-                    print link
-                    print year
+                    writeFile.write(name + ', ' + year + ', ' + link + '\n')
