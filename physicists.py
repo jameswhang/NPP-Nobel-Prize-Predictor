@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # James Whang, 5/8/2015
-# Scraper for Wikipedia
+# Scraper for Wikipedia List of Physicists
 
 import urllib2
 from bs4 import BeautifulSoup
@@ -15,7 +15,7 @@ def get_year(people_str):
     print people
     return people
 
-writeFile = open('list_of_scientists.csv', 'wb')
+writeFile = open('List_of_physicists.csv', 'wb')
 scientists = []
 
 wikipage = urllib2.urlopen('http://en.wikipedia.org/wiki/List_of_physicists').read()
