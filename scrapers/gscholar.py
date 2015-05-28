@@ -16,15 +16,18 @@ def _gen_random_user_agent():
 def _gen_fake_google_id():
     return hashlib.md5(str(random.random()).encode('utf-8')).hexdigest()[:16]
 
+def _wait_random_time():
+    time.sleep(random.random(5, 10))
+
 def _do_gscholar_request(gid, query):
     print gid
-    time.sleep(random.random() * 15)
+    _wait_random_time()
     u_agent = _gen_random_user_agent()
     return requests.get(GSCHOLAR_BASE_URL, params=query, headers = {'User-Agent': u_agent, 'Cookie': 'GSP=ID=%s:CF=4' % gid})
 
 def _do_gscholar_request_with_link(gid, link):
     print gid
-    time.sleep(random.random() * 15)
+    _wait_random_time()
     u_agent = _gen_random_user_agent()
     return requests.get(GSCHOLAR_BASE_URL + link, headers = {'User-Agent': u_agent, 'Cookie': 'GSP=ID=%s:CF=4' % gid})
 
