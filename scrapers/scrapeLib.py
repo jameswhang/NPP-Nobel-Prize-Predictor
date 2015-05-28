@@ -27,3 +27,26 @@ def extractYear(li_str):
 				return -1
 		else:
 			return -1
+
+
+def scholar_form_query(names):
+	names = names.split(' ')
+	q = ''
+	for name in names:
+		q += name
+		if name is names[len(names)-1]:
+			return q
+		else: 
+			q += '+'
+
+
+def wiki_extract_name(data):
+	return data[0].replace(' ', '_')
+
+
+def wiki_extract_link(data):
+	return data[2].replace(' ', '').replace('\n', '')
+
+def wiki_extract_info(th_str):
+	for char in th_str:
+		if 

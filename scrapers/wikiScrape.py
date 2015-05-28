@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#-*- coding: utf-8 -*-
 
 # wikiScrape.py
 # James Whang, 5/8/2015
@@ -8,9 +9,65 @@ import urllib2
 from bs4 import BeautifulSoup
 import random
 import time
+import codecs
+import scrapeLib
+import sys
+reload(sys)
 
-nobelFile = open('nobel_preprocessed.csv').readlines()
-writeFile = open('nobel_wikiScraped.csv', 'wb')
+sys.setdefaultencoding('utf-8')
+
+people = {}
+physicists_file = open('../csv/List_of_physicists.csv').readlines()
+chemists_file = open('../csv/List_of_chemists.csv').readlines()
+biologists_file = open('../csv/List_of_biologists.csv').readlines()
+
+output_file = open('../csv/Wikipedia_Scraped.csv', 'wb')
+
+info_to_scrape = ['Institutions', 'Alma mater', 'Notable awards', 'Fields', ]
+
+for line in physicists_file:
+    data = line.split(',')
+    name = scrapeLib.wiki_extract_name(data)
+    link = scrapeLib.wiki_extract_link(data)
+    people[name] = link
+
+for line in chemists_file:
+    data = line.split(',')
+    name = scrapeLib.wiki_extract_name(data)
+    link = scrapeLib.wiki_extract_link(data)
+    people[name] = link
+
+for line in biologists_file:
+    data = line.split(',')
+    name = scrapeLib.wiki_extract_name(data)
+    link = scrapeLib.wiki_extract_link(data)
+    people[name] = link
+
+for person, link in people.iteritems():
+    wikiPage = urllib2.urlopen('http://en.wikipedia.org' + link).read()
+    soup = BeautifulSoup(wikiPage)
+
+    infoBox = soup.find('table', class_='infobox')
+
+    if infoBox is None:
+        print ':(((('
+        continue
+
+    attr_list = infoBox.find_all('th')
+    attr_vals = infoBox.find_all('td')
+    print len(attr_list)
+    print len(attr_vals)
+
+    attr_file = open('../attr_test.csv', 'wb')
+    val_file = open('../val_test.csv', 'wb')
+    for attr in attr_list:
+        attr_file.write(str(attr))
+    for val in attr_vals:
+        val_file.write(str(val))
+
+    time.sleep(random.random() * 5)
+
+'''
 winnerNames = []
 categories = ['Born', 'Nationality', 'Institutions', 'Alma mater', 'Known for', 'Notable awards']
 scrapedInfo = []
@@ -67,3 +124,4 @@ for item in scrapedInfo:
         writeFile.write(val.replace('\n', '').encode('utf8'))
         writeFile.write(' ') 
 
+'''
