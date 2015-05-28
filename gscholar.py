@@ -39,7 +39,6 @@ def _get_links_to_citations(match):
 	return all_links
 
 def _parse_gscholar_html(page):
-	print 'parsing...'
 	soup = BeautifulSoup(page.text)
 	res = soup.find_all('div', class_='gs_fl')
 	print res
@@ -58,23 +57,19 @@ def form_query(name):
 	}
 
 def make_query(name):
-	print 'making query on the name ' + name
 	q = form_query(name)
 	gid = _gen_fake_google_id()
 	request_result = _do_gscholar_request(gid, q)
-	print request_result.url
 	parse_result = _parse_gscholar_html(request_result)
 	return parse_result
 
 def make_query_on_citation(citation_link):
-	print 'making query on the link ' + citation_link
 	gid = _gen_fake_google_id()
 	request_result = _do_gscholar_request_with_link(gid, citation_link)
 	parse_result = _parse_gscholar_html(request_result)
 	return parse_result
 
 def get_pagerank_score(target, alpha, depth):
-	print "Ah..?"
 	if depth == 0:
 		query_result = make_query_on_citation(target)
 		total_citations = query_result['citation_count']
