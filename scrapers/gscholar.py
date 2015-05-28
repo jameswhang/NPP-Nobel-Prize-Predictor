@@ -12,11 +12,13 @@ def _gen_fake_google_id():
 	return hashlib.md5(str(random.random()).encode('utf-8')).hexdigest()[:16]
 
 def _do_gscholar_request(gid, query):
-	time.sleep(random.random() * 5)
+	print gid
+	time.sleep(random.random() * 15)
 	return requests.get(GSCHOLAR_BASE_URL, params=query, headers = {'User-Agent': 'Mozilla/5.0', 'Cookie': 'GSP=ID=%s:CF=4' % gid})
 
 def _do_gscholar_request_with_link(gid, link):
-	time.sleep(random.random() * 5)
+	print gid
+	time.sleep(random.random() * 15)
 	return requests.get(GSCHOLAR_BASE_URL + link, headers = {'User-Agent': 'Mozilla/5.0', 'Cookie': 'GSP=ID=%s:CF=4' % gid})
 
 def _get_citation_count(match):
@@ -26,7 +28,6 @@ def _get_citation_count(match):
 		if 'Cited by' in rtext:
 			this_count = rtext.split(' ')[2]
 			total_count += int(this_count)
-			print this_count
 	return total_count
 
 def _get_links_to_citations(match):
@@ -34,14 +35,12 @@ def _get_links_to_citations(match):
 	for r in match:
 		if 'Cited by' in str(r.text):
 			link = str(r).split('"')[3]
-			print link
 			all_links.append(link)
 	return all_links
 
 def _parse_gscholar_html(page):
 	soup = BeautifulSoup(page.text)
 	res = soup.find_all('div', class_='gs_fl')
-	print res
 	total_citations = _get_citation_count(res)
 	cited_by = _get_links_to_citations(res)
 
@@ -60,6 +59,7 @@ def make_query(name):
 	q = form_query(name)
 	gid = _gen_fake_google_id()
 	request_result = _do_gscholar_request(gid, q)
+	print request_result
 	parse_result = _parse_gscholar_html(request_result)
 	return parse_result
 
@@ -87,5 +87,3 @@ def get_pagerank_score(target, alpha, depth):
 	for citation in cited_by_list:
 		sum_cindex += get_pagerank_score(citation, alpha, depth-1)
 	return (1 - alpha) * total_citations + alpha * sum_cindex
-
-print get_pagerank_score('albert einstein', 0.5, PAGERANK_MAX_DEPTH)
