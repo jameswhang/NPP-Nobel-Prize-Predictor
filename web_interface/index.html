@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>The Nobel Prize Predictor</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="navbar-header">
+        <a class="navbar-brand">The Nobel Prize Predictor</a>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		</button>
+	</div>
+</nav>
+
+<div class="container-fluid">
+  <!--left-->
+  <div class="col-sm-3">
+    	<div class="panel panel-default">
+         	<div class="panel-heading text-center">Task</div>
+            <div class="panel-body">Given a scientist sufficiently famous to have a Wikipedia page, predict whether he/she will win the Nobel Prize in Chemistry, Physics, or Medicine in the future.</div>
+            <div class="panel-body">
+                <img src="./img/content_einstein.png" class="img-center img-responsive"></img>
+            </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading text-center">Dataset</div>
+         	<div class="panel-body">Choosing the appropriate dataset was the most difficult challenge that we faced. It was easy to find out the names of all the scientists who won the Nobel Prize, but it wasn't so easy to decide on where to find the "unsuccessful" examples that we can perform the classification on, without posing a bias on the dataset. In the end, we decided that it makes the most sense to scrape the list of scientists (physicists, chemists, and biologists) from Wikipedia. Read more about the data collection process on the right.</div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading">Attributes</div>
+            <div class="panel-body">
+                To classify scientists into the winner and non-winner group, we chose the following attributes:
+                <ul>
+                    <li>Country of Origin</li>
+                    <li>Date of Birth</li>
+                    <li>Institutions Affiliated with</li>
+                    <li>Alma Mater</li>
+                    <li>Previous Awards Won</li>
+                    <li>Citation Index</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading">Title</div>
+         	<div class="panel-body">Content here..</div>
+        </div>
+        <hr>
+  </div><!--/left-->
+  
+  <!--center-->
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <h2>The Nobel Prize Predictor</h2>
+        </div>
+        <img src="./img/nobel_medal.png" class="img-responsive img-center"></img>
+       
+        <p>The Nobel Prize is arguably the most prestigious award an individual can get in the academia. Awarded for "the Benefit on Mankind", the Nobel Prize is given to those who have made a significant contribution to the field of natural sciences like Chemistry, Physiology/Medicine, and Physics, and social sciences like Economics and Literature.</p>
+        <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, Enrico Fermi, and Marie Curie, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
+        <p>Unfortunately, the process of Nobel Prize selection is very complicated. Each year, the Nobel Prize Committee selects a few nominators who secretly makes the nominations. The nominations are concealed for the following 50 years, making it difficult for finding out even the candidates for the prize.</p>
+        <p>With the use of machine learning, we decided to tackle this problem and make a model that can predict whether a scientist will win the Nobel Prize in the natural sciences area (Chemistry, Physics, and Physiology/Medicine) in the future.</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Article Heading</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+          Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+          dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+          Aliquam in felis sit amet augue.</p>
+        <p class="lead"><button class="btn btn-default">Read More</button></p>
+        <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
+        <ul class="list-inline"><li><a href="#">4 Days Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 7 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 56 Shares</a></li></ul>
+      </div>
+    </div>
+    <hr>      
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Article Heading</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+          Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+          dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+          Aliquam in felis sit amet augue.</p>
+        <p class="lead"><button class="btn btn-default">Read More</button></p>
+        <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
+        <ul class="list-inline"><li><a href="#">1 Week Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 4 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 34 Shares</a></li></ul>
+      </div>
+    </div>
+    <hr>
+  </div><!--/center-->
+
+  <!--right-->
+  <div class="col-sm-3">
+        <h2>Data Collection Process</h2>
+    	<div class="panel panel-default">
+         	<div class="panel-heading">Wikipedia</div>
+         	<div class="panel-body">
+            We scraped the names of scientists from three different Wikipedia pages.
+            <ul>
+              <li><a href="http://en.wikipedia.org/wiki/List_of_chemists">List of Chemists</a></li>
+              <li><a href="http://en.wikipedia.org/wiki/List_of_physicists">List of Physicists</a></li>
+              <li><a href="http://en.wikipedia.org/wiki/List_of_biologists">List of Biologists</a></li>
+            </ul>
+            These pages contained both winners and non-winners of the Nobel Prize in the three natural sciences disciplines. However, there were also some problems involved with Wikipedia. Since Wikipedia is an open-source encyclopedia where everyone can freely edit the contents, the quality of the content wasn't always very reliable. For example, Xi Jinping (China's Prime Minister) was in the list of chemists in the Wikipedia. However, it didn't matter too much because these inevitably formed the outliers of the data when we started collecting their attributes.
+            We scraped names off of these lists specifically because all the attributes we wanted to collect were available in Wikipedia pages of most scientists, and we decided that it would pose the least bias for us to scrape Wikipedia pages of all scientists that are available to us. Furthermore, this drastically decreased the number of missing attributes in our data set since our sample data was limited to those who at least have a Wikipedia page. A downside of this decision is that it actually gives us only about 950 instances, which may or may not be enough for building an accurate model.
+          </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading">Title</div>
+         	<div class="panel-body">Content here..</div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading">Title</div>
+         	<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+            Aliquam in felis sit amet augue.</div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+         	<div class="panel-heading">Title</div>
+         	<div class="panel-body">Content here..</div>
+        </div>
+        <hr>
+  </div><!--/right-->
+  <hr>
+</div><!--/container-fluid-->
+	<!-- script references -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
