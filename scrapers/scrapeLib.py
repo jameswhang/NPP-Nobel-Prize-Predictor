@@ -47,6 +47,8 @@ def wiki_extract_name(data):
 def wiki_extract_link(data):
 	return data[2].replace(' ', '').replace('\n', '')
 
+'''
 def wiki_extract_info(th_str):
 	for char in th_str:
 		if 
+		'''
