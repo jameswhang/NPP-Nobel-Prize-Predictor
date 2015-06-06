@@ -23,27 +23,49 @@ biologists_file = open('../csv/List_of_biologists.csv').readlines()
 
 output_file = open('../csv/Wikipedia_Scraped.csv', 'wb')
 
-info_to_scrape = ['Institutions', 'Alma mater', 'Notable awards', 'Fields', ]
+attr_file = open('../attr_test.csv', 'wb')
+val_file = open('../val_test.csv', 'wb')
 
+info_to_scrape = ['Nationality', 'Institutions', 'Alma mater', 'Notable awards', 'Fields', 'Known for']
+
+first = True
+'''
 for line in physicists_file:
+    if first:
+        first = False
+        continue
     data = line.split(',')
     name = scrapeLib.wiki_extract_name(data)
     link = scrapeLib.wiki_extract_link(data)
     people[name] = link
+'''
 
 for line in chemists_file:
+    if first:
+        first = False
+        continue
     data = line.split(',')
     name = scrapeLib.wiki_extract_name(data)
     link = scrapeLib.wiki_extract_link(data)
     people[name] = link
 
+'''
 for line in biologists_file:
     data = line.split(',')
     name = scrapeLib.wiki_extract_name(data)
     link = scrapeLib.wiki_extract_link(data)
     people[name] = link
 
+'''
+output_file.write('Name | Nationality | Institutions | Alma mater | Notable awards | Fields | Known for\n')
+
 for person, link in people.iteritems():
+    if 'Raymond_Davis_Jr' in person:
+        continue
+    print '****' + person + '****'
+    print '****' + link + '****'
+    if 'William_Henry_Perkin' in person:
+        continue
     wikiPage = urllib2.urlopen('http://en.wikipedia.org' + link).read()
     soup = BeautifulSoup(wikiPage)
 
@@ -55,73 +77,36 @@ for person, link in people.iteritems():
 
     attr_list = infoBox.find_all('th')
     attr_vals = infoBox.find_all('td')
-    print len(attr_list)
-    print len(attr_vals)
 
-    attr_file = open('../attr_test.csv', 'wb')
-    val_file = open('../val_test.csv', 'wb')
-    for attr in attr_list:
-        attr_file.write(str(attr))
-    for val in attr_vals:
-        val_file.write(str(val))
+    if len(attr_list) != len(attr_vals):
+        print ':((((('
+        continue 
 
-    time.sleep(random.random() * 5)
-
-'''
-winnerNames = []
-categories = ['Born', 'Nationality', 'Institutions', 'Alma mater', 'Known for', 'Notable awards']
-scrapedInfo = []
-
-for line in nobelFile:
-    data = line.split(',')
-    winnerNames.append(data[2])
-
-#winnerNames = ['Marie Curie']
-for winner in winnerNames:
-    print winner
-    newDict = {}
-    winner = winner.replace(' ', '_')
-    winner = winner.replace('\'', '%27')
-    winner = winner.replace('\n', '')
-    winner = winner.replace('"', '')
-    newDict['name'] = winner
-
-    if winner == 'Lord_Rayleigh_(John_William_Strutt)':
-        winner = 'John_William_Strutt,_3rd_Baron_Rayleigh'
-    
-    wikipage = urllib2.urlopen(
-            'http://en.wikipedia.org/wiki/' + str(winner)).read()
-
-    soup = BeautifulSoup(wikipage)
-    infoBox = soup.find('table', class_='infobox')
-
-    #print infoBox
-    if infoBox is None:
-        continue
-    attr_list = infoBox.find_all('th')
-    attr_val_list = infoBox.find_all('td')
-
+    attrDict = {
+        'Nationality': -1,
+        'Institutions': -1,
+        'Alma mater': -1,
+        'Notable awards': -1,
+        'Fields': -1,
+        'Known for': -1,
+    }
     index = 0
 
-    for attr_tag in attr_list:
-        attr_tag_str = str(attr_tag)
-        attr = attr_tag_str.split('>')[1]
-        attr = attr.split('<')[0]
-
-        if attr in categories:
-            attr_val = attr_val_list[index].get_text()
-            print attr
-            print attr_val
-            newDict[attr] = attr_val
-
+    for attr in attr_list:
+        if attr.text in info_to_scrape:
+            attrDict[attr.text] = index
         index += 1
-        
-    time.sleep(random.random() * 5)
-    scrapedInfo.append(newDict)
 
-for item in scrapedInfo:
-    for attr in item:
-        writeFile.write(val.replace('\n', '').encode('utf8'))
-        writeFile.write(' ') 
+    output_file.write(person + ' | ')
+    for info in info_to_scrape:
+        print info
+        i = attrDict[info]
+        if i != -1:
+            val = attr_vals[i].text.decode('utf-8').replace(u'\u000a', u'\u0026').encode('utf-8')
+        else:
+            val = ''
+        output_file.write(repr(val))
+        output_file.write(' | ')
 
-'''
+    output_file.write('\n')
+    time.sleep(3)
