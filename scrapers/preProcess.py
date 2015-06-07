@@ -5,15 +5,20 @@ info_scraped = ['Nationality', 'Institutions', 'Alma mater', 'Notable awards', '
 
 first = True
 for line in wiki_data:
-	data = line.split('|')
-	awards = data[4]
-	new_wiki_data.write(line.replace('\n', ''))
+    data = line.split(',')
+    for someData in data:
+        if someData is '':
+            new_wiki_data.write(',')
+        else:
+            new_wiki_data.write(someData.replace('"', '').replace("'", "").replace('\n', '') + ',')
+    awards = data[4]
+    #new_wiki_data.write(line.replace('\n', ''))
 
-	if first:
-		new_wiki_data.write(' | Nobel Laureate\n')
-		first = False
-		continue
-	if 'Nobel' in awards:
-		new_wiki_data.write(' | Yes \n')
-	else:
-		new_wiki_data.write(' | No \n')
+    if first:
+        new_wiki_data.write(' , Nobel Laureate\n')
+        first = False
+        continue
+    if 'Nobel' in awards:
+        new_wiki_data.write(' , Yes \n')
+    else:
+        new_wiki_data.write(' , No \n')

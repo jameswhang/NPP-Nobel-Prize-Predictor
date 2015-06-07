@@ -57,7 +57,7 @@ for line in biologists_file:
     people[name] = link
 
 '''
-output_file.write('Name | Nationality | Institutions | Alma mater | Notable awards | Fields | Known for\n')
+output_file.write('Name , Nationality , Institutions , Alma mater , Notable awards , Fields , Known for\n')
 
 for person, link in people.iteritems():
     if 'Raymond_Davis_Jr' in person:
@@ -97,7 +97,7 @@ for person, link in people.iteritems():
             attrDict[attr.text] = index
         index += 1
 
-    output_file.write(person + ' | ')
+    output_file.write(person + ' , ')
     for info in info_to_scrape:
         print info
         i = attrDict[info]
@@ -106,7 +106,7 @@ for person, link in people.iteritems():
         else:
             val = ''
         output_file.write(repr(val))
-        output_file.write(' | ')
+        output_file.write(' , ')
 
     output_file.write('\n')
     time.sleep(3)
