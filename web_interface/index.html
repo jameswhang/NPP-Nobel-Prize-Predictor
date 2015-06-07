@@ -55,8 +55,8 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Title</div>
-         	<div class="panel-body">Content here..</div>
+         	<div class="panel-heading">Citation Index</div>
+            <div class="panel-body"><p>Reuters has been able to successfully <a href="http://thomsonreuters.com/en/press-releases/2014/thomson-reuters-predicts-2014-nobel-laureates--researchers-forecast-for-nobel-recognition.html">predicted</a> 35 Nobel Laureates in the past, by using their own citation data on scientists and applying the <a href="http://en.wikipedia.org/wiki/PageRank">PageRank algorithm</a> on the citation data. Influenced by this, we decided to calculate this index ourselves and use it as an attribute for our data set. Because of the limitation on citation data that we have, we could not directly apply the PageRank algorithm, but had to create a variant of it. More specifically, we used the following formula:</p> <div><img class=img-center src="./img/formula.png"></img></div> where I is the citation score of a paper, alpha is a weight that can be adjusted, and p is the citation score of a paper that cites the paper in consideration. The recursion depth of the algorithm was applied only once due to the limitation in data collection process. This is explained further in the data collection process section.</div>
         </div>
         <hr>
   </div><!--/left-->
@@ -79,27 +79,19 @@
     <hr>
     <div class="row">
       <div class="col-xs-12">
-        <h2>Article Heading</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-          Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-          dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-          Aliquam in felis sit amet augue.</p>
-        <p class="lead"><button class="btn btn-default">Read More</button></p>
-        <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
-        <ul class="list-inline"><li><a href="#">4 Days Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 7 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 56 Shares</a></li></ul>
+        <h2>Heading</h2>
+        <p>
+          Content here...
+        </p>
       </div>
     </div>
     <hr>      
     <div class="row">
       <div class="col-xs-12">
-        <h2>Article Heading</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-          Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-          dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-          Aliquam in felis sit amet augue.</p>
-        <p class="lead"><button class="btn btn-default">Read More</button></p>
-        <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
-        <ul class="list-inline"><li><a href="#">1 Week Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 4 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 34 Shares</a></li></ul>
+        <h2>Heading</h2>
+        <p>
+          Content here...
+        </p>
       </div>
     </div>
     <hr>
@@ -123,16 +115,19 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Title</div>
-         	<div class="panel-body">Content here..</div>
+         	<div class="panel-heading">Google Scholar</div>
+            <div class="panel-body">
+                <p>Google Scholar is arguably the richest source of citation data that is publicly available. However, Google has a very strict <a href="https://support.google.com/websearch/answer/86640">policy</a> against automated queries, and this made the scaping process extremely difficult. Not only does Google drop any packets that are not from browsers but also it has very sophisticated bot detection method.</p> 
+                <p>By giving modifications to our HTTP request header, we were able to successfully scrape the data for a few scientists (~ 10 scientists) but after that, Google permanently blocked the IP address of my query. Any attempt to trick Google by sending a query between random intervals of 20-30 seconds did not work either, and it was unclear how Google was detecting my scraper.</p>
+                <img src="./img/google.png" class="img-responsive img-center"></img>
+                <p>Consequently we manually searched through all chemists name in Google Scholar and set the recursion depth of our PageRank score calculation algorithm to only 2, instead of the initial plan of 3. To facilitate the process we wrote a short script in JavaScript that extracts just the citation counts from a given page. In the process of doing this we also found out that Google thinks we are bots even when we were doing them by hand. It seemed like Google was simply blocking the IP if there were more than certain amount of queries over the time, which meant that in order to get around their bot detection method, the bot would have to go slower than our hand, which sort of defeats our purpose of using the bot.</p> </div>
         </div>
         <hr>
         <div class="panel panel-default">
          	<div class="panel-heading">Title</div>
-         	<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-            Aliquam in felis sit amet augue.</div>
+         	<div class="panel-body">
+                Content here...
+            </div> 
         </div>
         <hr>
         <div class="panel panel-default">
