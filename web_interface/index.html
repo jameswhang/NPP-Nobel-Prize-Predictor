@@ -28,7 +28,7 @@
   <div class="col-sm-3">
     	<div class="panel panel-default">
          	<div class="panel-heading text-center">Task</div>
-            <div class="panel-body">Given a scientist sufficiently famous to have a Wikipedia page, predict whether he/she will win the Nobel Prize in Chemistry, Physics, or Medicine in the future.</div>
+            <div class="panel-body">Given a scientist sufficiently famous to have a Wikipedia page, predict whether he/she will win the Nobel Prize in Chemistry in the future.</div>
             <div class="panel-body">
                 <img src="./img/content_einstein.png" class="img-center img-responsive"></img>
             </div>
@@ -66,22 +66,35 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <h2>The Nobel Prize Predictor</h2>
+          <h1>The Nobel Prize Predictor</h1>
+          <h3>Abstract</h3>
         </div>
+        <p>By:
+          <ul>
+            <li>James Whang (sungyoonwhang2017@u.northwestern.edu)</li>
+            <li>Tae Heon Jeong (taejeong2013@u.northwestern.edu)</li>
+          </ul>
+          For EECS 349: Machine Learning, Spring 2015 at Northwestern University
+        </p>
         <img src="./img/nobel_medal.png" class="img-responsive img-center"></img>
        
         <p>The Nobel Prize is arguably the most prestigious award an individual can get in the academia. Awarded for "the Benefit on Mankind", the Nobel Prize is given to those who have made a significant contribution to the field of natural sciences like Chemistry, Physiology/Medicine, and Physics, and social sciences like Economics and Literature.</p>
-        <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, Enrico Fermi, and Marie Curie, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
+        <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
         <p>Unfortunately, the process of Nobel Prize selection is very complicated. Each year, the Nobel Prize Committee selects a few nominators who secretly makes the nominations. The nominations are concealed for the following 50 years, making it difficult for finding out even the candidates for the prize.</p>
-        <p>With the use of machine learning, we decided to tackle this problem and make a model that can predict whether a scientist will win the Nobel Prize in the natural sciences area (Chemistry, Physics, and Physiology/Medicine) in the future.</p>
+        <p>With the use of machine learning, we decided to tackle this problem and make a model that can predict whether a scientist will win the Nobel Prize in the future: to be more specific, the Nobel Prize in Chemistry.</p>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-xs-12">
-        <h2>Heading</h2>
+        <h2>Result</h2>
         <p>
-          Content here...
+
+          Three different classifiers were used to create models and were compared. More specifically:
+          <ul>
+            <li><i>Bayes Net</i> : Given the relatively small size of data 
+            <li><i>K Nearest-Neighbor</i> : Since we predict the Nobel Laureates to form some sort of cluster, we can use the K nearest-neighbor classifier.
+            <li><i>Functional Trees</i> : Nobel Laureates had noticeably high citation scores in comparison to the non-winners. However, the general trend was that the more recent in history the scientist lived in, the higher citation score he or she had. This poses some sort of a regression pattern between the two attributes. <a href="http://download.springer.com/static/pdf/377/art%253A10.1023%252FB%253AMACH.0000027782.67192.13.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Farticle%2F10.1023%2FB%3AMACH.0000027782.67192.13&token2=exp=1433910853~acl=%2Fstatic%2Fpdf%2F377%2Fart%25253A10.1023%25252FB%25253AMACH.0000027782.67192.13.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Farticle%252F10.1023%252FB%253AMACH.0000027782.67192.13*~hmac=aa1ca2d1cb189dd7ff2914a2f7a18765c8f2b0c70098e4c3c8b1cc826e704d8b">Functional trees</a> could be helpful in this scenario, since it's similar to a decision tree except each leaf of the can have some regression function in them.</li>
         </p>
       </div>
     </div>
