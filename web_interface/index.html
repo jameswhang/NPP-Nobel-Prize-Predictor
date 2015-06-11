@@ -20,7 +20,9 @@
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span>
 		</button>
+
 	</div>
+  <img src="./img/mccormick-purple-transparency.png" class="pull-right"></img>
 </nav>
 
 <div class="container-fluid">
@@ -55,8 +57,19 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading text-center">Citation Index</div>
+         	<div class="panel-heading text-center" id="cindex">Citation Index</div>
             <div class="panel-body"><p>Reuters has been able to successfully <a href="http://thomsonreuters.com/en/press-releases/2014/thomson-reuters-predicts-2014-nobel-laureates--researchers-forecast-for-nobel-recognition.html">predicted</a> 35 Nobel Laureates in the past, by using their own citation data on scientists and applying the <a href="http://en.wikipedia.org/wiki/PageRank">PageRank algorithm</a> on the citation data. Influenced by this, we decided to calculate this index ourselves and use it as an attribute for our data set. Because of the limitation on citation data that we have, we could not directly apply the PageRank algorithm, but had to create a variant of it. More specifically, we used the following formula:</p> <div><img class=img-center src="./img/formula.png"></img></div> where I is the citation score of a paper, alpha is a weight that can be adjusted, and p is the citation score of a paper that cites the paper in consideration. The recursion depth of the algorithm was applied only once due to the limitation in data collection process. This is explained further in the data collection process section.</div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">A Point of Interest</div>
+            <div class="panel-body">
+            <p>Our model predicts that a Northwestern professor and a Northwestern alumnus to win the Nobel Prize at some point in the future! Their names are...
+              <ul>
+              <li><a href="http://chemgroups.northwestern.edu/marks/about.html">Professor Tobin J. Marks</a> : Charles E. & Emma H. Morrison Professor of Chemistry, Northwestern University</li>
+              <li><a href="https://www.cce.caltech.edu/content/harry-b-gray">Professor Harry B. Gray</a> (Ph.D. at Northwestern) : Arnold O. Beckman Professor of Chemistry, California Institute of Technology</li>
+              </ul>
+            </div>
         </div>
         <hr>
   </div><!--/left-->
@@ -77,7 +90,7 @@
           For EECS 349: Machine Learning, Spring 2015 at Northwestern University.
           All data and scrapers used for this project are available in the <a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor">public Git repository</a>.
         </p>
-        <img src="./img/nobel_medal.png" class="img-responsive img-center"></img>
+        <img src="./img/nobel_medal.png" class="img-responsive img-center" style="max-width:300px"></img>
         <p>The Nobel Prize is arguably the most prestigious award an individual can get in the academia. Awarded for "the Benefit on Mankind", the Nobel Prize is given to those who have made a significant contribution to the field of natural sciences like Chemistry, Physiology/Medicine, and Physics, and social sciences like Economics and Literature.</p>
         <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
         <p>Unfortunately, the process of Nobel Prize selection is very complicated. Each year, the Nobel Prize Committee selects a few nominators who secretly makes the nominations. The nominations are concealed for the following 50 years, making it difficult for finding out even the candidates for the prize.</p>
@@ -89,6 +102,40 @@
     <hr>
     <div class="row">
       <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h4>Preprocessing</h4></div>
+        <div class="panel-body">
+        <p>
+          The entire data set that we worked with can be accessed <a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Everyone.csv">here</a>. The chemists in this data set can be categorized into the following categories:
+            <ol>
+              <li>Nobel Laureates who already died</li>
+              <li>Nobel Laureates who are still alive</li>
+              <li>Non-Nobel Laureates who already died</li>
+              <li>Non-Nobel Laureates who are still alive</li>
+            </ol>
+          Out of these categories, it is necessary to exclude those in the 4th category because strictly speaking, it's still possible for them to win the Nobel Prize in the future. Since we cannot correctly label them, we excluded them from our training set.
+          In addition, we omitted the following attributes from the training data:
+            <ul>
+              <li><i>Name</i> : This can become a source of overfitting.</li>
+              <li><i>Total Count and Sum of Counts that cite this person's papers</i> : Essentially the citation index is the function of these two attributes and having these two is redundant and unnecessary. </li>
+            </ul>
+        </p>
+        <p>
+          As mentioned in the <a href="#cindex">citation index</a> section, the variable alpha can be adjusted. We preprocessed the dataset by calculating the score with different alpha values (ranging from 0 to 1 with interval of 0.1). <br>
+          Each of the preprocessed dataset with different values of alpha can be accessed here:
+            <ul>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha01.csv">Alpha = 0.1</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha02.csv">Alpha = 0.2</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha03.csv">Alpha = 0.3</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha04.csv">Alpha = 0.4</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha05.csv">Alpha = 0.5</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha06.csv">Alpha = 0.6</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha07.csv">Alpha = 0.7</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha08.csv">Alpha = 0.8</a></li>
+              <li><a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor/blob/master/data_preprocessed/Chemists_Alpha09.csv">Alpha = 0.9</a></li>
+        </p>
+        </div>
+      </div>
       <div class="panel panel-default">
         <div class="panel-heading text-center"><h4>Result</h4></div>
         <div class="panel-body">
@@ -115,8 +162,8 @@
               <li>Bayes net didn't get affected by alpha either.</li>
             </ul>
         This result shows that even though we lacked much of the citation data, we were able to predict whether a person will win the Nobel Prize up to a similar accuracy that Reuters was able to achieve using their extensive data.</p>
-        <p>Using Weka's AttributeSelectedClassifier, we also found out the three most important attributes. Not surprisingly, the citation score was one of them. The other two were Institutions and Alma Mater, which is again not too surprising result.
-        </p>
+        <p>Using Weka's AttributeSelectedClassifier, we also found out the three most important attributes. Not surprisingly, the citation score was one of them. The other two were Institutions and Alma Mater, which is again not too surprising result.</p>
+        <p>
         </div>
       </div>
       </div>
@@ -146,6 +193,22 @@
               <p>By giving modifications to our HTTP request header, we were able to successfully scrape the data for a few scientists (~ 10 scientists) but after that, Google permanently blocked the IP address of my query. Any attempt to trick Google by sending a query between random intervals of 20-30 seconds did not work either, and it was unclear how Google was detecting my scraper.</p>
               <img src="./img/google.png" class="img-responsive img-center"></img>
               <p>Consequently we manually searched through all chemists' names in Google Scholar and set the recursion depth of our PageRank score calculation algorithm to only 2, instead of the initial plan of 3. To facilitate the process we wrote a short script in JavaScript that extracts just the citation counts from a given page. In the process of doing this we also found out that Google thinks we are bots even when we were doing them by hand. It seemed like Google was simply blocking the IP if there were more than certain amount of queries over the time, which meant that in order to get around their bot detection method, the bot would have to go slower than our hand, which sort of defeats our purpose of using the bot.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">Future Directions & Improvements</div>
+            <div class="panel-body">
+              <p>
+                As discussed previously, our biggest challenge occurred in defining a reasonable set of scientists for our dataset.
+                The largest limitation with our data set would be that it is not the best representation of the entire chemists in the world mostly because only the well-known chemists are listed on Wikipedia. In other words, the result of our model may not necessarily apply to every single chemists in the world.
+                </p>
+                <p>
+                Another major limitation is that the size of our dataset is only 233. Therefore, the accuracy of our model is vulnerable to small changes in the dataset and more prone to overfitting.
+                As mentioned in the Google Scholar scraping section, we had trouble accessing enough data to make the PageRank algorithm really work. If access to a bigger source of data for citation index, our variation of PageRank algorithm could work much better than it does now.
+                </p>
+                <p>Something that we could have tried but couldn’t due to time limits is to come up with a way to deal with attributes that may contain more than one value - for example, institutions or alma mater. One way to have done this is to use some kind of binary encoding - have each bit represent a school, n bits would be enough to encode all possibilities when there are a total of n different schools being represented by the data set. This could have yielded a better result. Another way to have done this is to make each school an attribute, although that could potentially have led to use of different classifiers and not something like decision trees since the number of attributes would grow extremely large and the dataset would become a very sparse matrix.
+              </p>
             </div>
         </div>
   </div><!--/right-->

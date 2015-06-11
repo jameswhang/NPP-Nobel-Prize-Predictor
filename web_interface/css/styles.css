@@ -17,4 +17,12 @@ body {
 	max-width: 700px;
 	max-height: 500px;
 }
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 98px; /*set margin this way in your custom styesheet*/
+    max-height: 50px;
+}
 
+img.pull-right {
+	max-height: 50px;
+}
