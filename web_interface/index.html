@@ -16,7 +16,7 @@
 	<body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
-        <a class="navbar-brand">The Nobel Prize Predictor</a>
+        <a class="navbar-brand text-center">The Nobel Prize Predictor</a>
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span>
 		</button>
@@ -36,11 +36,11 @@
         <hr>
         <div class="panel panel-default">
          	<div class="panel-heading text-center">Dataset</div>
-         	<div class="panel-body">Choosing the appropriate dataset was the most difficult challenge that we faced. It was easy to find out the names of all the scientists who won the Nobel Prize, but it wasn't so easy to decide on where to find the "unsuccessful" examples that we can perform the classification on, without posing a bias on the dataset. In the end, we decided that it makes the most sense to scrape the list of scientists (physicists, chemists, and biologists) from Wikipedia. Read more about the data collection process on the right.</div>
+         	<div class="panel-body">Choosing the appropriate dataset was the most difficult challenge that we faced. It was easy to find out the names of all the scientists who won the Nobel Prize, but it wasn't so easy to decide on where to find the "unsuccessful" examples that we can perform the classification on, without posing a bias on the dataset. In the end, we decided that it makes the most sense to scrape the list of scientists (physicists, chemists, and biologists) from Wikipedia. Read more about the data collection process on the right hand side of the page.</div>
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Attributes</div>
+         	<div class="panel-heading text-center">Attributes</div>
             <div class="panel-body">
                 To classify scientists into the winner and non-winner group, we chose the following attributes:
                 <ul>
@@ -55,7 +55,7 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Citation Index</div>
+         	<div class="panel-heading text-center">Citation Index</div>
             <div class="panel-body"><p>Reuters has been able to successfully <a href="http://thomsonreuters.com/en/press-releases/2014/thomson-reuters-predicts-2014-nobel-laureates--researchers-forecast-for-nobel-recognition.html">predicted</a> 35 Nobel Laureates in the past, by using their own citation data on scientists and applying the <a href="http://en.wikipedia.org/wiki/PageRank">PageRank algorithm</a> on the citation data. Influenced by this, we decided to calculate this index ourselves and use it as an attribute for our data set. Because of the limitation on citation data that we have, we could not directly apply the PageRank algorithm, but had to create a variant of it. More specifically, we used the following formula:</p> <div><img class=img-center src="./img/formula.png"></img></div> where I is the citation score of a paper, alpha is a weight that can be adjusted, and p is the citation score of a paper that cites the paper in consideration. The recursion depth of the algorithm was applied only once due to the limitation in data collection process. This is explained further in the data collection process section.</div>
         </div>
         <hr>
@@ -65,56 +65,68 @@
   <div class="col-sm-6">
     <div class="row">
       <div class="col-xs-12">
-        <div class="text-center">
           <h1>The Nobel Prize Predictor</h1>
-          <h3>Abstract</h3>
-        </div>
+          <div class="panel panel-default">
+          <div class="panel-heading text-center"><h4>Abstract</h4></div>
+          <div class="panel-body">
         <p>By:
           <ul>
             <li>James Whang (sungyoonwhang2017@u.northwestern.edu)</li>
             <li>Tae Heon Jeong (taejeong2013@u.northwestern.edu)</li>
           </ul>
-          For EECS 349: Machine Learning, Spring 2015 at Northwestern University
+          For EECS 349: Machine Learning, Spring 2015 at Northwestern University.
+          All data and scrapers used for this project are available in the <a href="https://github.com/jameswhang/NPP-Nobel-Prize-Predictor">public Git repository</a>.
         </p>
         <img src="./img/nobel_medal.png" class="img-responsive img-center"></img>
-       
         <p>The Nobel Prize is arguably the most prestigious award an individual can get in the academia. Awarded for "the Benefit on Mankind", the Nobel Prize is given to those who have made a significant contribution to the field of natural sciences like Chemistry, Physiology/Medicine, and Physics, and social sciences like Economics and Literature.</p>
         <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
         <p>Unfortunately, the process of Nobel Prize selection is very complicated. Each year, the Nobel Prize Committee selects a few nominators who secretly makes the nominations. The nominations are concealed for the following 50 years, making it difficult for finding out even the candidates for the prize.</p>
-        <p>With the use of machine learning, we decided to tackle this problem and make a model that can predict whether a scientist will win the Nobel Prize in the future: to be more specific, the Nobel Prize in Chemistry.</p>
+        <p>We show a proof of concept that such task can be done through classifier algorithms even with a data set limited in both the quantity and the size, and compare the different classifier algorithms that can be applied to train the model. </p>
+      </div>
+      </div>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-xs-12">
-        <h2>Result</h2>
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h4>Result</h4></div>
+        <div class="panel-body">
         <p>
-
-          Three different classifiers were used to create models and were compared. More specifically:
+          We considered three different classifiers to train and compare. More specifically:
           <ul>
-            <li><i>Bayes Net</i> : Given the relatively small size of data 
-            <li><i>K Nearest-Neighbor</i> : Since we predict the Nobel Laureates to form some sort of cluster, we can use the K nearest-neighbor classifier.
+            <li><i>K Nearest-Neighbor</i> : Since we predict the Nobel Laureates to form some sort of cluster, we can use the K nearest-neighbor classifier. Due to the presence of noise in the data, the value of K should be high.</li>
             <li><i>Functional Trees</i> : Nobel Laureates had noticeably high citation scores in comparison to the non-winners. However, the general trend was that the more recent in history the scientist lived in, the higher citation score he or she had. This poses some sort of a regression pattern between the two attributes. <a href="http://download.springer.com/static/pdf/377/art%253A10.1023%252FB%253AMACH.0000027782.67192.13.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Farticle%2F10.1023%2FB%3AMACH.0000027782.67192.13&token2=exp=1433910853~acl=%2Fstatic%2Fpdf%2F377%2Fart%25253A10.1023%25252FB%25253AMACH.0000027782.67192.13.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Farticle%252F10.1023%252FB%253AMACH.0000027782.67192.13*~hmac=aa1ca2d1cb189dd7ff2914a2f7a18765c8f2b0c70098e4c3c8b1cc826e704d8b">Functional trees</a> could be helpful in this scenario, since it's similar to a decision tree except each leaf of the can have some regression function in them.</li>
+            <li><i>Bayes Net</i> : Given the small number of examples and the Bayesian nature of the problem (i.e. Given the past Nobel Laureates' citation scores, what is the likeliness of a person with this score to become a Nobel Laureate in the future?)</li>
+          </ul>
         </p>
-      </div>
-    </div>
-    <hr>      
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Heading</h2>
         <p>
-          Content here...
+          Weka packages were used to train models based on these classifiers (IBk, FT, and BayesNet packages). In addition, different values for the alpha parameter in the citation index score was tried out, ranging from 0 to 1 with interval of 0.1. The graph below shows the 10-fold cross validation accuracy.
         </p>
+        <div class="panel-body">
+          <img src="./img/Alpha.png" class="img-center"></img>
+        </div>  
+        <p>With a limited number of instances (233), it came down to a difference of 2 to 3 across the range of values for alpha. Few points to note here are:
+            <ul>
+              <li>The highest accuracy achieved was 78.5408%, achieved by using functional trees with alpha values greater than 0.8.</li>
+              <li>The classifier with the highest accuracy is functional trees, followed by KNN, and Bayes Net.</li>
+              <li>The value of alpha didn't affect the accuracy of functional trees because it can deal with it by applying regression in each node.</li>
+              <li>KNN shows a trend: the higher the value of alpha, the higher the accuracy gets.</li>
+              <li>Bayes net didn't get affected by alpha either.</li>
+            </ul>
+        This result shows that even though we lacked much of the citation data, we were able to predict whether a person will win the Nobel Prize up to a similar accuracy that Reuters was able to achieve using their extensive data.</p>
+        <p>Using Weka's AttributeSelectedClassifier, we also found out the three most important attributes. Not surprisingly, the citation score was one of them. The other two were Institutions and Alma Mater, which is again not too surprising result.
+        </p>
+        </div>
+      </div>
       </div>
     </div>
-    <hr>
   </div><!--/center-->
 
   <!--right-->
   <div class="col-sm-3">
-        <h2>Data Collection Process</h2>
     	<div class="panel panel-default">
-         	<div class="panel-heading">Wikipedia</div>
+         	<div class="panel-heading text-center">Scraping Wikipedia</div>
          	<div class="panel-body">
             We scraped the names of scientists from three different Wikipedia pages.
             <ul>
@@ -128,26 +140,14 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Google Scholar</div>
+         	<div class="panel-heading text-center">Scraping Google Scholar</div>
             <div class="panel-body">
-                <p>Google Scholar is arguably the richest source of citation data that is publicly available. However, Google has a very strict <a href="https://support.google.com/websearch/answer/86640">policy</a> against automated queries, and this made the scaping process extremely difficult. Not only does Google drop any packets that are not from browsers but also it has very sophisticated bot detection method.</p> 
-                <p>By giving modifications to our HTTP request header, we were able to successfully scrape the data for a few scientists (~ 10 scientists) but after that, Google permanently blocked the IP address of my query. Any attempt to trick Google by sending a query between random intervals of 20-30 seconds did not work either, and it was unclear how Google was detecting my scraper.</p>
-                <img src="./img/google.png" class="img-responsive img-center"></img>
-                <p>Consequently we manually searched through all chemists name in Google Scholar and set the recursion depth of our PageRank score calculation algorithm to only 2, instead of the initial plan of 3. To facilitate the process we wrote a short script in JavaScript that extracts just the citation counts from a given page. In the process of doing this we also found out that Google thinks we are bots even when we were doing them by hand. It seemed like Google was simply blocking the IP if there were more than certain amount of queries over the time, which meant that in order to get around their bot detection method, the bot would have to go slower than our hand, which sort of defeats our purpose of using the bot.</p> </div>
+              <p>Google Scholar is arguably the richest source of citation data that is publicly available. However, Google has a very strict <a href="https://support.google.com/websearch/answer/86640">policy</a> against automated queries, and this made the scaping process extremely difficult. Not only does Google drop any packets that are not from browsers but also it has very sophisticated bot detection method.</p> 
+              <p>By giving modifications to our HTTP request header, we were able to successfully scrape the data for a few scientists (~ 10 scientists) but after that, Google permanently blocked the IP address of my query. Any attempt to trick Google by sending a query between random intervals of 20-30 seconds did not work either, and it was unclear how Google was detecting my scraper.</p>
+              <img src="./img/google.png" class="img-responsive img-center"></img>
+              <p>Consequently we manually searched through all chemists' names in Google Scholar and set the recursion depth of our PageRank score calculation algorithm to only 2, instead of the initial plan of 3. To facilitate the process we wrote a short script in JavaScript that extracts just the citation counts from a given page. In the process of doing this we also found out that Google thinks we are bots even when we were doing them by hand. It seemed like Google was simply blocking the IP if there were more than certain amount of queries over the time, which meant that in order to get around their bot detection method, the bot would have to go slower than our hand, which sort of defeats our purpose of using the bot.</p>
+            </div>
         </div>
-        <hr>
-        <div class="panel panel-default">
-         	<div class="panel-heading">Title</div>
-         	<div class="panel-body">
-                Content here...
-            </div> 
-        </div>
-        <hr>
-        <div class="panel panel-default">
-         	<div class="panel-heading">Title</div>
-         	<div class="panel-body">Content here..</div>
-        </div>
-        <hr>
   </div><!--/right-->
   <hr>
 </div><!--/container-fluid-->
