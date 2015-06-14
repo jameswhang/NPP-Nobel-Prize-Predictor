@@ -4,3 +4,5 @@ Contains the implementation of the machine learner and the web scraper used for 
 License: GPL
 
 Made by: James Whang
+
+<a href="http://jameswhang.github.io/thenobelprizepredictor/index.html">See it online.</a>
