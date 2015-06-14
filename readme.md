@@ -3,4 +3,4 @@ Contains the implementation of the machine learner and the web scraper used for 
 
 License: GPL
 
-Made by: James Whang, Tae Heon Jeong
+Made by: James Whang
