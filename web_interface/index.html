@@ -58,7 +58,7 @@
         <hr>
         <div class="panel panel-default">
          	<div class="panel-heading text-center" id="cindex">Citation Index</div>
-            <div class="panel-body"><p>Reuters has been able to successfully <a href="http://thomsonreuters.com/en/press-releases/2014/thomson-reuters-predicts-2014-nobel-laureates--researchers-forecast-for-nobel-recognition.html">predicted</a> 35 Nobel Laureates in the past, by using their own citation data on scientists and applying the <a href="http://en.wikipedia.org/wiki/PageRank">PageRank algorithm</a> on the citation data. Influenced by this, we decided to calculate this index ourselves and use it as an attribute for our data set. Because of the limitation on citation data that we have, we could not directly apply the PageRank algorithm, but had to create a variant of it. More specifically, we used the following formula:</p> <div><img class=img-center src="./img/formula.png"></img></div> where I is the citation score of a paper, alpha is a weight that can be adjusted, and p is the citation score of a paper that cites the paper in consideration. The recursion depth of the algorithm was applied only once due to the limitation in data collection process. This is explained further in the data collection process section.</div>
+            <div class="panel-body"><p>Reuters has been able to successfully <a href="http://thomsonreuters.com/en/press-releases/2014/thomson-reuters-predicts-2014-nobel-laureates--researchers-forecast-for-nobel-recognition.html">predict</a> 35 Nobel Laureates in the past, by using their own citation data on scientists and applying the <a href="http://en.wikipedia.org/wiki/PageRank">PageRank algorithm</a> on the citation data. Influenced by this, we decided to calculate this index ourselves and use it as an attribute for our data set. Because of the limitation on citation data that we have, we could not directly apply the PageRank algorithm, but had to create a variant of it. More specifically, we used the following formula:</p> <div><img class=img-center src="./img/formula.png"></img></div> where I is the citation score of a paper, alpha is a weight that can be adjusted, and p is the citation score of a paper that cites the paper in consideration. The recursion depth of the algorithm was applied only once due to the limitation in data collection process. This is explained further in the data collection process section.</div>
         </div>
         <hr>
         <div class="panel panel-default">
@@ -94,7 +94,8 @@
         <p>The Nobel Prize is arguably the most prestigious award an individual can get in the academia. Awarded for "the Benefit on Mankind", the Nobel Prize is given to those who have made a significant contribution to the field of natural sciences like Chemistry, Physiology/Medicine, and Physics, and social sciences like Economics and Literature.</p>
         <p>Since 1901, there has been 889 winners of the Nobel Prize. Because Nobel Laureates include legendary figures such as Albert Einstein, not only the academia but the public are also interested in guessing who the winner will be for each year.</p>
         <p>Unfortunately, the process of Nobel Prize selection is very complicated. Each year, the Nobel Prize Committee selects a few nominators who secretly makes the nominations. The nominations are concealed for the following 50 years, making it difficult for finding out even the candidates for the prize.</p>
-        <p>We show a proof of concept that such task can be done through classifier algorithms even with a data set limited in both the quantity and the size, and compare the different classifier algorithms that can be applied to train the model. </p>
+        <p>We show a proof of concept that such task can be done through classifier algorithms even with a data set limited in both the quantity and the size, and compare the different classifier algorithms that can be applied to train the model.</p>
+        <p>Using 10-fold cross-validation method, we evaluated our model's performance on a dataset containing 233 chemists and reached a maximum of 78.5% accuracy.</p>
       </div>
       </div>
       </div>
@@ -148,11 +149,14 @@
           </ul>
         </p>
         <p>
-          Weka packages were used to train models based on these classifiers (IBk, FT, and BayesNet packages). In addition, different values for the alpha parameter in the citation index score was tried out, ranging from 0 to 1 with interval of 0.1. The graph below shows the 10-fold cross validation accuracy.
+          Weka packages were used to train models based on these classifiers (IBk, FT, and BayesNet packages). In addition, different values for the alpha parameter in the citation index score was tried out, ranging from 0 to 1 with interval of 0.1.
+        </p>
+        <p>
+          With a limited number of chemists in our dataset, it was very easy for our model to fall into overfitting problem. In particular, with few nominal attributes having finite space of the ones known so far limits our model significantly. For example, just because there are only a handful of institutions being represented by the past Nobel Laureates (i.e. Harvard, Cambridge, Oxford) it doesn't mean there can't be a winner from an institution without a past Laureate (i.e. Northwestern!). To avoid overfitting, we used the 10-fold cross-validation method to evaluate the accuracy of our model.
         </p>
         <div class="panel-body">
           <img src="./img/Alpha.png" class="img-center"></img>
-        </div>  
+        </div>
         <p>With a limited number of instances (233), it came down to a difference of 2 to 3 across the range of values for alpha. Few points to note here are:
             <ul>
               <li>The highest accuracy achieved was 78.5408%, achieved by using functional trees with alpha values greater than 0.8.</li>
